@@ -1,0 +1,59 @@
+#
+# px2firmware.txt
+#
+# a psend packet definition file to get the firmware
+# version of a PX2 or PX3 Raritan PDU
+#
+
+# the IP address of the Raritan PDU
+host 10.1.1.21
+
+# use SNMP port 161
+port 161
+
+# construct the packet `back to front`
+prepend
+
+# null
+0x05 0
+
+# OID 1.3.6.1.4.1.xxx.6.3.2.3.1.6.1.1.1
+0x06 16 0x2B 6 1 4 1 0xEB 0x2E 6 3 2 3 1 6 1 1 1
+
+# variable binding sequence
+0x30 20
+
+# variable binding overall sequence
+0x30 22
+
+# error offset (0 for a GET request SNMP packet)
+0x02 1  0
+
+# error code (0 for a GET request SNMP packet)
+0x02 1  0
+
+# 4 byte packet identifier (any 4 byte values will do)
+0x02 4  0xDEADBEEF
+
+# SNMP GET request PDU (Protocol Data Unit)
+0xA0 36
+
+# read community string
+0x04 6  'public'
+
+# SNMP version (0=Version 1, 1=Version 2c, 2=Version 3)
+0x02 1  1
+
+# final encapsulating sequence
+0x30 49
+
+# show the packet
+show
+
+# send the packet
+send
+
+# wait for and display any response
+receive
+
+# end of file 'px2firmware.txt'
