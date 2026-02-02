@@ -1,0 +1,12 @@
+#
+# tftpreadrequest.txt
+#
+# TFTP read request
+#
+
+host 10.1.1.5
+port 69
+0x0001 'file' 0 'octet' 0
+show
+send
+receive
