@@ -6,7 +6,7 @@
 #
 
 # the IP address of the Raritan PDU
-host 10.1.1.21
+host 10.7.0.12
 
 # use SNMP port 161
 port 161
@@ -27,22 +27,22 @@ prepend
 0x30 22
 
 # error offset (0 for a GET request SNMP packet)
-0x02 1  0
+0x02 1 0
 
 # error code (0 for a GET request SNMP packet)
-0x02 1  0
+0x02 1 0
 
 # 4 byte packet identifier (any 4 byte values will do)
-0x02 4  0xDEADBEEF
+0x02 4 0xDEADBEEF
 
 # SNMP GET request PDU (Protocol Data Unit)
 0xA0 36
 
 # read community string
-0x04 6  'public'
+0x04 6 'blipuc'
 
 # SNMP version (0=Version 1, 1=Version 2c, 2=Version 3)
-0x02 1  1
+0x02 1 1
 
 # final encapsulating sequence
 0x30 49
