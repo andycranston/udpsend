@@ -1,4 +1,4 @@
-# psend
+# udpsend
 
 Utility to construct and send UDP packets for network daemon testing
 
