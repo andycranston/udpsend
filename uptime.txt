@@ -22,10 +22,12 @@ prepend
 0x06 8 0x2B 6 1 2 1 1 3 0
 
 # variable binding sequence
-0x30 12
+length-1byte
+0x30
 
 # variable binding overall sequence
-0x30 14
+length-1byte
+0x30
 
 # error offset (0 for a GET request SNMP packet)
 0x02 1  0
@@ -37,16 +39,18 @@ prepend
 0x02 4  0xDEADBEEF
 
 # SNMP GET request PDU (Protocol Data Unit)
-0xA0 28
+length-1byte
+0xA0
 
 # read community string
-0x04 6  'public'
+0x04 6 'blipuc'
 
 # SNMP version (0=Version 1, 1=Version 2c, 2=Version 3)
-0x02 1  1
+0x02 1 1
 
 # final encapsulating sequence
-0x30 41
+length-1byte
+0x30
 
 # show the packet
 show
