@@ -392,6 +392,61 @@ would display:
 > 0000 : FF 05 74 6F 6B 65 6E 23 45 4F 46 23 00             ??token#EOF#?
 ```
 
+## Command `length-1byte`
+
+The `length-1byte` command adds a single byte to the packet. If the mode
+is `append` the byte gets added to the end of the packet. If the mode is
+`prepend` the byte is added to the beginning of the packet.
+
+The value of the byte is the current length of the packet.
+
+NOTE: the packet must currently be less than of equal to 255 bytes in
+length. The `udpsend.py` program should probably check this but currently
+does not.
+
+The `length-1byte` is useful when used with `prepend` when building simple SNMP packages. For example:
+
+```
+prepend
+# SNMP null
+0x05 0
+# SNMP OID 1.3.6.1.2.1.1.3.0
+0x06 8 0x2B 6 1 2 1 1 3 0
+# SNMP variable binding sequence
+length-1byte
+0x30
+show
+```
+
+Will build a packet as follows:
+
+```
+> 0000 : 30 0C 06 08 2B 06 01 02 01 01 03 00 05 00          0???+?????????
+```
+
+If we change the input to:
+
+```
+prepend
+# SNMP null
+0x05 0
+# SNMP variable binding sequence
+length-1byte
+0x30
+show
+```
+
+we now get:
+
+```
+000 : 30 02 05 00                                        0???
+```
+
+For a better example of this look at the `px2firmware.txt` file.
+
+
+
+
 ## Commands `alias` and `aliases`
 
 If you do not like the built names for the commands you can create
