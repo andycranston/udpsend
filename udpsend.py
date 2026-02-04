@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 #
-# @(!--#) @(#) udpsend.py, sversion 0.1.0, fversion 003, 03-february-2026
+# @(!--#) @(#) udpsend.py, sversion 0.1.0, fversion 004, 04-february-2026
 #
 # construct a UDP network packet and send it to a host
 #
@@ -233,6 +233,8 @@ def process_udp_sendfile(file):
         elif cmd == 'fill':
             for i in range(0, int(words[1])):
                 packet = addbytes(packet, bytearray(words2bytes(words[2:], linenum)), mode)
+        elif cmd == 'length-1byte':
+            packet = addbytes(packet, bytearray([len(packet)]), mode)
         elif cmd == 'sleep':
             time.sleep(float(words[1]))                
         elif cmd == 'show':
